@@ -62,28 +62,21 @@
                         <input type="text" class="input-field" id="username" placeholder="username" name="login" required
                             pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
                             title="Must be between 3-13 characters and must contain at least one letter" autocomplete="off"/>
-                        <div id="explanationUser" class="form-sign-up__style">
+                        <div id="explanation-user" class="form-sign-up__style">
                             <p id="userLett" class="invalid">
                             At least one letter
                             </p>
                             <p id="userLen" class="invalid">
                             3 to 18 characters
                             </p>
-                            <h3> Username may contain the following: </h3>
-                            <p id="userNum" class="opt">
-                            Numbers
-                            </p>
-                            <p id="userUnd" class="opt">
-                            Underscores
-                            </p>
-                            <p id="userHyp" class="opt">
-                            Hyphens
+                            <p id="userSpec" class="valid explanation-user__margin">
+                            No special characters "!@#$%^&*"(Except "-", "_")
                             </p>
                         </div>
                         <input type="password" class="input-field" id="password" placeholder="password" name="password" required
                             pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"
                             title="Must be between 8-32 characters and must contain at least one number and one special character" />
-                        <div id="explanation" class="form-sign-up__style">
+                        <div id="explanation-pass" class="form-sign-up__style">
                             <p id="passLen" class="invalid">
                             8 to 32 characters
                             </p>
@@ -93,21 +86,147 @@
                             <p id="passNum" class="invalid">
                             At least one number
                             </p>
-                            <p id="passSpec" class="invalid">
+                            <p id="passSpec" class="invalid explanation-user__margin">
                             At least one special character
                             </p>
                         </div>    
-                        <button type="button" id="signupButton" class="submit-btn" onclick="doSignup()">Signup</button><br />  
-                        <span class="text" style="color:rgb(203, 55, 21); font-family: 'Montserrat';" id="signupResult"></span>
+                        <button type="button" id="signupButton" class="submit-btn" onclick="doSignup()">Signup</button><br/>  
+                        <p class="signup__result" id="signupResult"></p>
                     </form>
                 </section>
                 </div>
             </div>
         </div>
-        <script>
-           
+    <!--code for username criteria message-->
+    <script>
+        let fNameField = document.getElementById("firstName");
+        let lNameField = document.getElementById("lastName");
+        let userform = document.getElementById("username");
+        
+        let numInput = document.getElementById("userNum");
+        let lettInput = document.getElementById("userLett");
+        let lenInput = document.getElementById("userLen");
+        let specInput = document.getElementById("userSpec");
+        let undInput = document.getElementById("userUnd");
 
-        </script>
+        //password message displays
+        userform.onfocus = function () {
+            document.getElementById("explanation-user").style.display = "block";
+
+        }
+
+        //password message goes away
+        userform.onblur = function () {
+            document.getElementById("explanation-user").style.display = "none";
+           
+        }
+        //password validation
+        userform.onkeyup = function () {
+            var lett = /[a-zA-Z]/g;
+            var spec = /[!@#$%^&*]/;
+            //check length
+            if ((userform.value.length >= 3 && userform.value.length <= 18)) {
+                lenInput.classList.remove("invalid");
+                lenInput.classList.add("valid");
+            }
+            else {
+                lenInput.classList.remove("valid");
+                lenInput.classList.add("invalid");
+            }
+
+            //check letters
+            if ((userform.value.match(lett))) {
+                lettInput.classList.remove("invalid");
+                lettInput.classList.add("valid");
+            }
+
+            else {
+                lettInput.classList.remove("valid");
+                lettInput.classList.add("invalid");
+            }
+
+            //check special character
+            if ((userform.value.match(spec))) {
+                specInput.classList.remove("valid");
+                specInput.classList.add("invalid");
+            }
+
+            else {
+                specInput.classList.remove("invalid");
+                specInput.classList.add("valid");
+            }
+
+        }
+    </script>
+    <!--code for password criteria message-->
+    <script>
+      let passform = document.getElementById("password");
+      let pNumInput = document.getElementById("passNum");
+      let pLettInput = document.getElementById("passLett");
+      let pSpecInput = document.getElementById("passSpec");
+      let pLenInput = document.getElementById("passLen");
+
+      //password message displays
+      passform.onfocus = function () {
+        document.getElementById("explanation-pass").style.display = "block";
+      };
+
+      //password message goes away
+      passform.onblur = function () {
+        document.getElementById("explanation-pass").style.display = "none";
+      }
+
+      //password validation
+      passform.onkeyup = function () {
+        var nums = /[0-9]/g;
+        var lett = /[a-zA-Z]/g;
+        var spec = /[!@#$%^&*]/g;
+
+        //check length
+        if (passform.value.length >= 8 && passform.value.length <= 32) {
+          pLenInput.classList.remove("invalid");
+          pLenInput.classList.add("valid");
+        }
+
+        else {
+          pLenInput.classList.remove("valid");
+          pLenInput.classList.add("invalid");
+        }
+
+        //check numbers
+        if (passform.value.match(nums)) {
+          pNumInput.classList.remove("invalid");
+          pNumInput.classList.add("valid");
+        }
+
+        else {
+          pNumInput.classList.remove("valid");
+          pNumInput.classList.add("invalid");
+        }
+
+        //check letters
+        if (passform.value.match(lett)) {
+          pLettInput.classList.remove("invalid");
+          pLettInput.classList.add("valid");
+        }
+
+        else {
+          pLettInput.classList.remove("valid");
+          pLettInput.classList.add("invalid");
+        }
+
+        //check special characters
+        if (passform.value.match(spec)) {
+          pSpecInput.classList.remove("invalid");
+          pSpecInput.classList.add("valid");
+        }
+
+        else {
+          pSpecInput.classList.remove("valid");
+          pSpecInput.classList.add("invalid");
+        }
+      }
+    </script>
     </main>
 </body>
 </html>    

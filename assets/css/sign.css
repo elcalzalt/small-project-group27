@@ -53,7 +53,7 @@
     border-radius: 17px;
     text-transform: uppercase;
     outline: 0;
-    background: #897261;
+    background: rgba(110,80,50);
     width: 100%;
     border: 0;
     padding: 15px;
@@ -62,6 +62,9 @@
     
     transition: all 0.3 ease;
     cursor: pointer;
+}
+.submit-btn:hover{
+    background-color: rgb(132, 111, 84);
 }
 /* #explanation,
 #explanationUser {
@@ -75,7 +78,12 @@
 .form-sign-up__style{
     font-size: 1.2rem;
     line-height: 1.5;
+    margin-left: 10px;
+    display: none;
 } 
+.valid {
+    color: #009345;
+}
 /* Add a red text color and a sad face when the requirements are wrong */
 .invalid {
     color: red;
@@ -85,6 +93,9 @@
     position: relative;
     left: -35px;
     
+}
+.explanation-user__margin{
+    margin-bottom: 15px;
 }
 .form__sign-in,.form__sign-up{
     display: flex;
@@ -136,4 +147,9 @@
     border-bottom-left-radius: 17px;
     border-bottom-right-radius: 17px;
     transition: .4s;
+}
+.signup__result{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #171100;
 }

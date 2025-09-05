@@ -1,0 +1,139 @@
+.sign-form{
+    background-color: rgba(160,200,140,0.8);
+}
+.form__center-wrap{
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 75px);
+    justify-content: center;
+    flex-direction: column;
+}
+.form__wrap{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    gap: 50px;
+}
+.toggle-btn {
+    
+    padding: 10px 42px;
+    background-color: rgba(245,240,230);
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    color: #FFFFFF;
+    font-style: normal;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    width: 370px;
+    color: #171100;
+    border-radius: 17px 17px 0 0; /* make sure radius matches */
+    opacity: 0.7;
+}
+.form__input{
+
+}
+.input-field {
+    border-radius: 17px;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.submit-btn{
+    border-radius: 17px;
+    text-transform: uppercase;
+    outline: 0;
+    background: #897261;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+/* #explanation,
+#explanationUser {
+    display: none;
+    color: #000;
+    position: relative;
+    bottom: 1px;
+    text-align: center;
+    font-family: 'Montserrat';
+} */
+.form-sign-up__style{
+    font-size: 1.2rem;
+    line-height: 1.5;
+} 
+/* Add a red text color and a sad face when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    
+}
+.form__sign-in,.form__sign-up{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(245,240,230);
+    width: 370px;
+    height: 600px;
+    padding: 20px 30px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    opacity: 0.7;
+    
+}
+.toggle-btn__sign-in,.toggle-btn__sign-up{
+    transition: .2s;
+}
+.form-sign-in__wrap:hover .form__sign-in{
+    opacity: 1;
+    outline: 7px solid rgba(110,80,50);
+    transition: .4s;
+}
+.form-sign-in__wrap:hover .toggle-btn__sign-in{
+    opacity: 1;
+    color: rgba(245,240,230);
+    background-color: rgba(110,80,50);
+    outline: 7px solid rgba(110,80,50);
+    box-shadow: 0 0 0 6px rgba(110,80,50,1);
+    transition: .4s;
+}
+.form-sign-up__wrap:hover .form__sign-up{
+    opacity: 1;
+    outline: 7px solid rgba(110,80,50);
+    transition: .4s;
+}
+.form-sign-up__wrap:hover .toggle-btn__sign-up{
+    opacity: 1;
+    color: rgba(245,240,230);
+    background-color: rgba(110,80,50);
+    outline: 7px solid rgba(110,80,50);
+    box-shadow: 0 0 0 6px rgba(110,80,50,1);
+    transition: .4s;
+}
+.form__sign-up{
+    background-color: rgba(245,240,230);
+    width: 370px;
+    height: 600px;
+    padding: 20px 30px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    transition: .4s;
+}

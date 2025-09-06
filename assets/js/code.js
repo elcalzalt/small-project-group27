@@ -107,7 +107,7 @@ function doSignup() {
 
             if (this.status == 409) {
                 document.getElementById("signupResult").innerHTML = "User already exists";
-                document.getElementById("signupResult").style.color = "rgba(255,185,0,)";
+                document.getElementById("signupResult").style.color = "#171100";
                 document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,)";
                 document.getElementById("signupResult").style.display = "inline-block";
                 return;

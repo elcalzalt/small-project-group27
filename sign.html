@@ -40,23 +40,30 @@
             <div class="form__wrap">
                 <!-- Signin part -->
                 <div class="form-sign-in__wrap">
-                    <button type="button" class="toggle-btn toggle-btn__sign-in" onclick="clickRegister()" id="loginSlider">Login</button>
+                    <div class="btn__wrap">
+                        <button type="button" class="toggle-btn toggle-btn__sign-in" onclick="clickRegister()" id="loginSlider">Login</button>
+                        <p class="login__result" id="loginResult"></p>
+                    </div>
                     <section class="form__sign-in">
-                        <form id="login" class="form__input">
+                        <form id="login" class="form-input__sign-in">
                             <input type="text" class="input-field" id="loginName" placeholder="username" name="username" required
                                 pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}$" autocomplete="off" />
                             <input type="password" class="input-field" id="loginPassword" placeholder="password" name="password" required
                                 pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}" />
                             <button type="button" id="loginButton" class="submit-btn form-submit-btn__login" onclick="doLogin()">Login</button>
-                            <span class="text" id="loginResult"></span>
+                            
                         </form>
                     </section>
                 </div>
                 <!-- Signup part -->
                 <div class="form-sign-up__wrap">
-                    <button type="button" class="toggle-btn toggle-btn__sign-up" onclick="clickLogin()">Signup</button>
+                    <div class="btn__wrap">
+                        <button type="button" class="toggle-btn toggle-btn__sign-up" onclick="clickLogin()">Signup</button>
+                        <p class="signup__result" id="signupResult"></p>
+                    </div>
                     <section class="form__sign-up">
-                    <form id="signup" class="input-form">
+                       
+                    <form id="signup" class="form-input__sign-up">
                         <input type="text" class="input-field" id="firstName" placeholder="first&nbsp;name" name="firstName" required autocomplete="off"/>
                         <input type="text" class="input-field" id="lastName" placeholder="last&nbsp;name" name="lastName" required autocomplete="off"/>
                         <input type="text" class="input-field" id="username" placeholder="username" name="login" required
@@ -68,6 +75,9 @@
                             </p>
                             <p id="userLen" class="invalid">
                             3 to 18 characters
+                            </p>
+                            <p id="userspace" class="valid">
+                            No space allowed
                             </p>
                             <p id="userSpec" class="valid explanation-user__margin">
                             No special characters "!@#$%^&*"(Except "-", "_")
@@ -91,7 +101,7 @@
                             </p>
                         </div>    
                         <button type="button" id="signupButton" class="submit-btn" onclick="doSignup()">Signup</button><br/>  
-                        <p class="signup__result" id="signupResult"></p>
+                        
                     </form>
                 </section>
                 </div>
@@ -108,7 +118,7 @@
         let lenInput = document.getElementById("userLen");
         let specInput = document.getElementById("userSpec");
         let undInput = document.getElementById("userUnd");
-
+        let spacInput = document.getElementById("userspace");
         //password message displays
         userform.onfocus = function () {
             document.getElementById("explanation-user").style.display = "block";
@@ -124,6 +134,7 @@
         userform.onkeyup = function () {
             var lett = /[a-zA-Z]/g;
             var spec = /[!@#$%^&*]/;
+            var nospace = /^\S+$/;
             //check length
             if ((userform.value.length >= 3 && userform.value.length <= 18)) {
                 lenInput.classList.remove("invalid");
@@ -155,7 +166,16 @@
                 specInput.classList.remove("invalid");
                 specInput.classList.add("valid");
             }
-
+            //check space
+            if ((userform.value.match(nospace))) {
+                spacInput.classList.add("valid");
+                spacInput.classList.remove("invalid");
+            }
+            else {
+                spacInput.classList.remove("valid");
+                spacInput.classList.add("invalid");
+                
+            }
         }
     </script>
     <!--code for password criteria message-->

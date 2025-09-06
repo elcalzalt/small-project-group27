@@ -17,6 +17,9 @@ function doLogin() {
     var hash = md5(password);
     if (!validLoginForm(login, password)) {
         document.getElementById("loginResult").innerHTML = "invalid username or password";
+        document.getElementById("loginResult").style.color = "red";
+        document.getElementById("loginResult").style.border = "5px solid red";
+        document.getElementById("loginResult").style.display = "inline-block";
         return;
     }
     document.getElementById("loginResult").innerHTML = "";
@@ -42,6 +45,9 @@ function doLogin() {
 
                 if (userId < 1) {
                     document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+                    document.getElementById("loginResult").style.color = "red";
+                    document.getElementById("loginResult").style.border = "5px solid red";
+                    document.getElementById("loginResult").style.display = "inline-block";
                     return;
                 }
                 firstName = jsonObject.firstName;
@@ -67,6 +73,9 @@ function doSignup() {
 
     if (!validSignUpForm(firstName, lastName, username, password)) {
         document.getElementById("signupResult").innerHTML = "invalid signup";
+        document.getElementById("signupResult").style.color = "red";
+        document.getElementById("signupResult").style.border = "5px solid red";
+        document.getElementById("signupResult").style.display = "inline-block";
         return;
     }
 
@@ -98,6 +107,9 @@ function doSignup() {
 
             if (this.status == 409) {
                 document.getElementById("signupResult").innerHTML = "User already exists";
+                document.getElementById("signupResult").style.color = "rgba(255,185,0,)";
+                document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,)";
+                document.getElementById("signupResult").style.display = "inline-block";
                 return;
             }
 
@@ -106,6 +118,9 @@ function doSignup() {
                 let jsonObject = JSON.parse(xhr.responseText);
                 userId = jsonObject.id;
                 document.getElementById("signupResult").innerHTML = "User added";
+                document.getElementById("signupResult").style.color = "green";
+                document.getElementById("signupResult").style.border = "5px solid green";
+                document.getElementById("signupResult").style.display = "inline-block";
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
                 saveCookie();

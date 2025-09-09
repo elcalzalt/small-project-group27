@@ -183,14 +183,18 @@ function doLogout() {
 }
 
 function showTable() {
+    
     var x = document.getElementById("addMe");
-    var contacts = document.getElementById("contactsTable")
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    var contacts = document.getElementById("contactsTable");
+    var search = document.getElementById("function__search");
+    if (window.getComputedStyle(x).display === "none") {
+        x.style.display = "flex";
         contacts.style.display = "none";
+        search.style.display = "none";
     } else {
         x.style.display = "none";
-        contacts.style.display = "block";
+        contacts.style.display = "flex";
+        search.style.display = "flex";
     }
 }
 
@@ -271,7 +275,7 @@ function loadContacts() {
                         "<button type='button' id='edit_button" + i + "' class='w3-button w3-circle w3-lime' onclick='edit_row(" + i + ")'>" + "<span class='glyphicon glyphicon-edit'></span>" + "</button>" +
                         "<button type='button' id='save_button" + i + "' value='Save' class='w3-button w3-circle w3-lime' onclick='save_row(" + i + ")' style='display: none'>" + "<span class='glyphicon glyphicon-saved'></span>" + "</button>" +
                         "<button type='button' onclick='delete_row(" + i + ")' class='w3-button w3-circle w3-amber'>" + "<span class='glyphicon glyphicon-trash'></span> " + "</button>" + "</td>";
-                    text += "<tr/>"
+                    text += "</tr>"
                 }
                 text += "</table>"
                 document.getElementById("tbody").innerHTML = text;
@@ -282,6 +286,7 @@ function loadContacts() {
         console.log(err.message);
     }
 }
+
 
 function edit_row(id) {
     document.getElementById("edit_button" + id).style.display = "none";
@@ -603,4 +608,14 @@ function validAddContact(firstName, lastName, phone, email) {
 
     return true;
 
+}
+
+function openModal() {
+  document.getElementById("addMe").style.display = "flex";
+  document.body.style.overflow = "hidden"; // prevent background scroll
+}
+
+function closeModal() {
+  document.getElementById("addMe").style.display = "none";
+  document.body.style.overflow = ""; // restore scroll
 }

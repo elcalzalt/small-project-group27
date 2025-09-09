@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project-2</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/fonts/styleSheet.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/contacts.css"/>
+
+    <script type="text/javascript" src="./assets/js/md5.js"></script>
+	<script type="text/javascript" src="./assets/js/code.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            readCookie();
+            loadContacts();
+        }, false);
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="content">
+            <nav class="nav-bar">
+                <div class="nav-bar__left">
+                    <a href="index.html" class="nav-bar__logo">TALK</a>
+                    <a class="bar-left__item" href="#!">Services</a>
+                    <a class="bar-left__item" href="#!">Pricing</a>
+                    <a class="bar-left__item" href="about.html">About Us</a>
+                </div>
+                <div class="nav-bar__right">
+                    <a href="sign.html" class="bar-right__cta bar-right__sign-in">Sign in</a>
+                    <a href="sign.html" class="bar-right__cta bar-right__sign-up">Sign up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Main -->
+    <main class="contacts">
+        <div class="content">
+            <div class="contacts__welcome">
+			    <p id="userName" class="welcome__desc">sdfs</p>
+		    </div>
+			<div class="functions">
+                <section class="functions__wrap">
+                    <button class="functions__cta" type="button" onclick="loadContacts(); ">Refresh</button>
+                    <button class="functions__cta" type="button" onclick="showTable();"> Add Contact</button>
+                </section>
+                <section class="search-container" id="function__search">
+                    <p class="search-container__func-name">Look up a contact?</p>
+                    <input onkeyup=searchContacts() type="text" name="search" id="searchText" placeholder="Search by first or last name..."
+                    class="search-container__input">
+                </section>
+            </div>
+        
+        <!--add contact form-->
+		<div class="add-contacts">
+			<form class ="add-contacts__wrap" id="addMe" action="" method="post">
+				<input class="add-contacts__input" type="text" id="contactTextFirst" placeholder="First Name" required>
+				<input class="add-contacts__input" type="text" id="contactTextLast" placeholder="Last Name" required>
+				<input class="add-contacts__input" type="text" id="contactTextNumber" placeholder="XXX-XXX-XXXX" required
+					pattern="^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$">
+				<input class="add-contacts__input" type="text" id="contactTextEmail" placeholder="name@email.com"
+					pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
+				<div class="add-contact__sub-cta">
+                    <button class="add-contacts__cta contacts-cta__cancel" type="button" id="addContactButton" class="buttons font" onclick="showTable();"> Cancel
+				    </button>
+                    <button class="add-contacts__cta contacts-cta__add" type="button" id="addContactButton" class="buttons font" onclick="addContact();"> Add Contact
+				    </button>
+                </div>
+			</form>
+		</div>
+            <!--contact table-->
+           <div class="tables" id="contactsTable">
+                <table class ="table__edit" id="contacts" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>First&nbspName</th>
+                            <th>Last&nbspName</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+
+
+
+<!-- <script>
+document.addEventListener("DOMContentLoaded", function() {
+    let ids = [];
+
+    function loadContacts() {
+        const contacts = [
+            { ID: 1, FirstName: "John", LastName: "Doe", Email: "john@example.com", Phone: "123-456-7890" },
+            { ID: 2, FirstName: "Jane", LastName: "Smith", Email: "jane@example.com", Phone: "987-654-3210" },
+            { ID: 3, FirstName: "Alice", LastName: "Johnson", Email: "alice@example.com", Phone: "555-123-4567" }
+        ];
+
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML = ""; // clear table
+
+        contacts.forEach((c, i) => {
+            ids[i] = c.ID;
+
+            const tr = document.createElement("tr");
+            tr.id = `row${i}`;
+            tr.innerHTML = `
+                <td id="first_Name${i}"><span>${c.FirstName}</span></td>
+                <td id="last_Name${i}"><span>${c.LastName}</span></td>
+                <td id="email${i}"><span>${c.Email}</span></td>
+                <td id="phone${i}"><span>${c.Phone}</span></td>
+                <td>
+                    <button type="button" id="edit_button${i}" class="w3-button w3-circle w3-lime" onclick="edit_row(${i})">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button type="button" id="save_button${i}" class="w3-button w3-circle w3-lime" onclick="save_row(${i})" style="display:none">
+                        <span class="glyphicon glyphicon-saved"></span>
+                    </button>
+                    <button type="button" onclick="delete_row(${i})" class="w3-button w3-circle w3-amber">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Dummy functions so buttons don't break
+    window.edit_row = function(i) { console.log("edit_row", i); };
+    window.save_row = function(i) { console.log("save", i); };
+    window.delete_row = function(i) { console.log("delete", i); };
+
+    // Call loadContacts after DOM is ready
+    loadContacts();
+});
+</script> -->
+    </main>
+</body>
+</html>      

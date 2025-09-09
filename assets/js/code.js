@@ -22,7 +22,6 @@ function doLogin() {
         document.getElementById("loginResult").style.display = "inline-block";
         return;
     }
-    document.getElementById("loginResult").innerHTML = "";
 
     let tmp = {
         login: login,
@@ -81,8 +80,6 @@ function doSignup() {
 
     var hash = md5(password);
 
-    document.getElementById("signupResult").innerHTML = "";
-
     let tmp = {
         firstName: firstName,
         lastName: lastName,
@@ -108,7 +105,7 @@ function doSignup() {
             if (this.status == 409) {
                 document.getElementById("signupResult").innerHTML = "User already exists";
                 document.getElementById("signupResult").style.color = "#171100";
-                document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,)";
+                document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,1)";
                 document.getElementById("signupResult").style.display = "inline-block";
                 return;
             }
@@ -129,7 +126,10 @@ function doSignup() {
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("signupResult").innerHTML = err.message;
+        console.error(err); // see if parsing fails
+        document.getElementById("signupResult").innerHTML = "Unexpected error";
+        document.getElementById("signupResult").style.display = "inline-block";
+        document.getElementById("signupResult").style.color = "red";
     }
 }
 
@@ -389,32 +389,85 @@ function delete_row(no) {
 
 }
 
+// function searchContacts() {
+//     const content = document.getElementById("searchText");
+//     const selections = content.value.toUpperCase().split(' ');
+//     const table = document.getElementById("contacts");
+//     const tr = table.getElementsByTagName("tr");// Table Row
+
+//     for (let i = 0; i < tr.length; i++) {
+//         const td_fn = tr[i].getElementsByTagName("td")[0];// Table Data: First Name
+//         const td_ln = tr[i].getElementsByTagName("td")[1];// Table Data: Last Name
+
+//         if (td_fn && td_ln) {
+//             const txtValue_fn = td_fn.textContent || td_fn.innerText;
+//             const txtValue_ln = td_ln.textContent || td_ln.innerText;
+//             tr[i].style.display = "none";
+
+//             for (selection of selections) {
+//                 if (txtValue_fn.toUpperCase().indexOf(selection) > -1) {
+//                     tr[i].style.display = "";
+//                 }
+//                 if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
+//                     tr[i].style.display = "";
+//                 }
+//             }
+//         }
+//     }
+// }
 function searchContacts() {
-    const content = document.getElementById("searchText");
-    const selections = content.value.toUpperCase().split(' ');
-    const table = document.getElementById("contacts");
-    const tr = table.getElementsByTagName("tr");// Table Row
+    let searchValue = document.getElementById("searchText").value;
 
-    for (let i = 0; i < tr.length; i++) {
-        const td_fn = tr[i].getElementsByTagName("td")[0];// Table Data: First Name
-        const td_ln = tr[i].getElementsByTagName("td")[1];// Table Data: Last Name
+    let tmp = {
+        search: searchValue,
+        userId: userId
+    };
 
-        if (td_fn && td_ln) {
-            const txtValue_fn = td_fn.textContent || td_fn.innerText;
-            const txtValue_ln = td_ln.textContent || td_ln.innerText;
-            tr[i].style.display = "none";
+    let jsonPayload = JSON.stringify(tmp);
 
-            for (selection of selections) {
-                if (txtValue_fn.toUpperCase().indexOf(selection) > -1) {
-                    tr[i].style.display = "";
+    let url = urlBase + '/SearchContacts.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error) {
+                    console.log(jsonObject.error);
+                    document.getElementById("tbody").innerHTML = "<p>No results found</p>";
+                    return;
                 }
-                if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
-                    tr[i].style.display = "";
+
+                let text = "<table border='1'>";
+                for (let i = 0; i < jsonObject.results.length; i++) {
+                    ids[i] = jsonObject.results[i].ID;
+                    text += "<tr id='row" + i + "'>";
+                    text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
+                    text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
+                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].EmailAddress + "</span></td>";
+                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].PhoneNumber + "</span></td>";
+                    text += "<td>" +
+                        "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>✏️</button>" +
+                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>💾</button>" +
+                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'>🗑️</button>" +
+                    "</td>";
+                    text += "</tr>";
                 }
+                text += "</table>";
+
+                document.getElementById("tbody").innerHTML = text;
             }
-        }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
     }
 }
+
 
 
 function clickLogin() {

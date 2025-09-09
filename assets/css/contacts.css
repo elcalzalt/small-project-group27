@@ -148,7 +148,7 @@
     align-items: center;
 }
 #contacts td{
-    border: 5px solid rgb(158, 116, 74);
+    border: 3px solid rgb(158, 116, 74);
 }
 #contacts th {
     padding: 25px 30px;
@@ -160,15 +160,18 @@
     color: rgba(245,240,230);
     background-color: rgb(158, 116, 74);
     text-transform: uppercase;
-    outline: 3px solid rgb(158, 116, 74);
     text-align: center;
+   
 }
-#contacts th:nth-child(1){
-    border-top-left-radius: 15px;
-} 
-#contacts th:last-child{
-    border-top-right-radius: 15px;
-} 
+table {
+    border-collapse: separate;   
+    border-top-left-radius: 23px;  
+    border-top-right-radius: 23px;       
+    border-spacing: 0;          
+    overflow: hidden;            
+}
+
+
 #contacts td {
     padding: 20px;
     text-align: left;

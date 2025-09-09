@@ -46,7 +46,7 @@
     <main class="contacts">
         <div class="content">
             <div class="contacts__welcome">
-			    <p id="userName" class="welcome__desc">sdfs</p>
+			    <p id="userName" class="welcome__desc"></p>
 		    </div>
 			<div class="functions">
                 <section class="functions__wrap">
@@ -86,7 +86,7 @@
                             <th>Last&nbspName</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th></th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody id="tbody"></tbody>
@@ -120,17 +120,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td id="email${i}"><span>${c.Email}</span></td>
                 <td id="phone${i}"><span>${c.Phone}</span></td>
                 <td>
-                    <button type="button" id="edit_button${i}" class="w3-button w3-circle w3-lime" onclick="edit_row(${i})">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </button>
-                    <button type="button" id="save_button${i}" class="w3-button w3-circle w3-lime" onclick="save_row(${i})" style="display:none">
-                        <span class="glyphicon glyphicon-saved"></span>
-                    </button>
-                    <button type="button" onclick="delete_row(${i})" class="w3-button w3-circle w3-amber">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                </td>
-            `;
+                    <button type="button" id="edit_button${i}" class="btn-edit" onclick="edit_row(${i})">✏️</button>
+        <button type="button" id="save_button${i}" class="btn-save" onclick="save_row(${i})" style="display:none">💾</button>
+        <button type="button" id="delete_button${i}" class="btn-delete" onclick="delete_row(${i})">🗑️</button>
+                </td>`;
             tbody.appendChild(tr);
         });
     }

@@ -143,9 +143,7 @@
     width: 100%;
     table-layout: fixed;
     border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
 }
 #contacts td{
     border: 3px solid rgb(158, 116, 74);
@@ -163,12 +161,14 @@
     text-align: center;
    
 }
-table {
-    border-collapse: separate;   
+.table__edit {
+    border-collapse: collapse;   
     border-top-left-radius: 23px;  
-    border-top-right-radius: 23px;       
+    border-top-right-radius: 23px;  
+    border: 3px solid black;     
     border-spacing: 0;          
-    overflow: hidden;            
+    overflow: hidden; 
+    width: 100%;  
 }
 
 
@@ -181,4 +181,40 @@ table {
     font-weight: bold;
     color: #66471b;
     background-color: rgba(245,240,230);
+}
+#contacts td span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 100%;
+    color: #66471b;
+}
+
+
+
+.btn-edit,
+.btn-save,
+.btn-delete {
+  border: none;
+  border-radius: 50%;   /* makes them round */
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.btn-edit {
+  background-color: #4caf50; /* green */
+  color: white;
+}
+
+.btn-save {
+  background-color: #2196f3; /* blue */
+  color: white;
+}
+
+.btn-delete {
+  background-color: #f44336; /* red */
+  color: white;
 }

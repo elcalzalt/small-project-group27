@@ -1,32 +1,58 @@
+
 <?php
-	require_once 'utils.php';
-	require_once 'db_connect.php';
 
 	$inData = getRequestInfo();
-	
+
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
 
-	$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-	$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-	$stmt->execute();
-	$result = $stmt->get_result();
-
-	if( $row = $result->fetch_assoc()  )
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+	if( $conn->connect_error )
 	{
-		$data = [
-			"id" => $row['ID'],
-			"firstName" => $row['firstName'],
-			"lastName" => $row['lastName']
-		];
-		returnWithInfo( $data );
+		returnWithError( $conn->connect_error );
 	}
 	else
 	{
-		returnWithError("No Records Found");
+		$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE (Login=? AND Password=?)");
+		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->execute();
+		$result = $stmt->get_result();
+
+		if( $row = $result->fetch_assoc()  )
+		{
+			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+		}
+		else
+		{
+			returnWithError("No Records Found");
+		}
+
+		$stmt->close();
+		$conn->close();
 	}
 
-	$stmt->close();
-	$conn->close();
+	function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
+
+	function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+
+	function returnWithInfo( $firstName, $lastName, $id )
+	{
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
+
 ?>

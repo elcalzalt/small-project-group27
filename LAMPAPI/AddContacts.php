@@ -1,43 +1,22 @@
 <?php
+	require_once 'utils.php';
+	require_once 'db_connect.php';
+
 	$inData = getRequestInfo();
-	
+
 	$firstName = $inData["firstName"];
-  $lastName = $inData["lastName"];
+	$lastName = $inData["lastName"];
 	$phoneNumber = $inData["phoneNumber"];
-  $emailAddress = $inData["emailAddress"];
-  $userId = $inData["userId"];
+	$emailAddress = $inData["emailAddress"];
+	$userId = $inData["userId"];
 
-
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error)
-	{
-			returnWithError( $conn->connect_error );
+	$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES(?,?,?,?,?)");
+	$stmt->bind_param("ssssi", $firstName, $lastName, $phoneNumber, $emailAddress, $userId);
+	if ($stmt->execute()) {
+		returnWithMessage("Successfully added contact");
+	} else {
+		returnWithError("Failed to insert contact: " . $stmt->error);
 	}
-	else
-	{
-			$stmt = $conn->prepare("INSERT into Contacts (FirstName,LastName,PhoneNumber,EmailAddress, UserID) VALUES(?,?,?,?,?)");
-			$stmt->bind_param("ssssi", $firstName, $lastName, $phoneNumber, $emailAddress, $userId);
-			$stmt->execute();
-			$stmt->close();
-			$conn->close();
-			returnWithError("");
-		}
-
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-
+	$stmt->close();
+	$conn->close();
 ?>

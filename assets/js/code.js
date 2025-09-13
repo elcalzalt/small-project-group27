@@ -269,8 +269,8 @@ function loadContacts() {
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].EmailAddress + "</span></td>";
-                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].PhoneNumber + "</span></td>";
+                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
+                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>✏️</button>" +
                         "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>💾</button>" +
@@ -448,8 +448,8 @@ function searchContacts() {
                     text += "<tr id='row" + i + "'>";
                     text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].EmailAddress + "</span></td>";
-                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].PhoneNumber + "</span></td>";
+                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
+                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>✏️</button>" +
                         "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>💾</button>" +

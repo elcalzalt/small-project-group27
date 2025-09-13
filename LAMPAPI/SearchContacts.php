@@ -1,70 +1,35 @@
 <?php
+	require_once 'utils.php';
+	require_once 'db_connect.php';
 
 	$inData = getRequestInfo();
 
-	$searchResults = "";
+	$searchResults = [];
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error)
+	$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email, UserID, ID FROM Contacts WHERE (FirstName like ? OR LastName like?) AND UserID=?");
+	$searchTerm = "%" . $inData["search"] . "%";
+	$stmt->bind_param("sss", $searchTerm, $searchTerm, $inData["userId"]);
+	$stmt->execute();
+
+	$result = $stmt->get_result();
+
+	while($row = $result->fetch_assoc())
 	{
-		returnWithError( $conn->connect_error );
+		$searchResults[] = $row;
+		$searchCount++;
+	}
+
+	if( $searchCount == 0 )
+	{
+		returnWithError( "No Records Found" );
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName like ? OR LastName like?) AND UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("sss", $colorName, $colorName, $inData["userId"]);
-		$stmt->execute();
-
-		$result = $stmt->get_result();
-
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			// $searchResults .= '"' . $row["FirstName"] . '"';
-			//"." means add
-			$searchResults .= '{"FirstName" : "' . $row["FirstName"]. '", "LastName" : "' . $row["LastName"]. '", "PhoneNumber" : "' . $row["PhoneNumber"]. '", "EmailAddress" : "' . $row["EmailAddress"]. '", "UserID" : "' . $row["UserID"].'", "ID" : "' . $row["ID"]. '"}';
-		}
-
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
-
-		$stmt->close();
-		$conn->close();
+		$data = ["results" => $searchResults];
+		returnWithInfo( $data );
 	}
 
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-
-	function returnWithInfo( $searchResults )
-	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-
+	$stmt->close();
+	$conn->close();
 ?>

@@ -31,4 +31,8 @@
 		$retValue["error"] = "";
 		sendResultInfoAsJson(json_encode($retValue));
 	}
+	
+	function returnWithMessage($message) {
+		returnWithInfo(["message" => $message]);
+	}
 ?>

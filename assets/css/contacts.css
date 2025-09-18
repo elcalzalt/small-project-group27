@@ -141,9 +141,10 @@
 .tables {
     margin-top: 50px;
     width: 100%;
-    table-layout: fixed;
     border-radius: 15px;
+    height: 500px;
     overflow: auto;
+    
 }
 #contacts td{
     border: 3px solid rgb(158, 116, 74);
@@ -169,6 +170,7 @@
     border-spacing: 0;          
     overflow: hidden; 
     width: 100%;  
+    table-layout: fixed;
 }
 
 

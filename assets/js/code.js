@@ -412,7 +412,9 @@ function searchContacts() {
 
                 if (jsonObject.error) {
                     console.log(jsonObject.error);
-                    document.getElementById("tbody").innerHTML = "<p>No results found</p>";
+                    document.getElementById("not-found").innerHTML = 'No results found!';
+                    document.getElementById("not-found").style.display = "inline-block";
+                    document.getElementById("tbody").innerHTML = "";
                     return;
                 }
 

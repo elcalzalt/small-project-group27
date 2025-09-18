@@ -91,52 +91,9 @@
                     </thead>
                     <tbody id="tbody"></tbody>
                 </table>
+                <p id="not-found"></p>
             </div>
 
-
-
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function() {
-    let ids = [];
-
-    function loadContacts() {
-        const contacts = [
-            { ID: 1, FirstName: "John", LastName: "Doe", Email: "john@example.com", Phone: "123-456-7890" },
-            { ID: 2, FirstName: "Jane", LastName: "Smith", Email: "jane@example.com", Phone: "987-654-3210" },
-            { ID: 3, FirstName: "Alice", LastName: "Johnson", Email: "alice@example.com", Phone: "555-123-4567" }
-        ];
-
-        const tbody = document.getElementById("tbody");
-        tbody.innerHTML = ""; // clear table
-
-        contacts.forEach((c, i) => {
-            ids[i] = c.ID;
-
-            const tr = document.createElement("tr");
-            tr.id = `row${i}`;
-            tr.innerHTML = `
-                <td id="first_Name${i}"><span>${c.FirstName}</span></td>
-                <td id="last_Name${i}"><span>${c.LastName}</span></td>
-                <td id="email${i}"><span>${c.Email}</span></td>
-                <td id="phone${i}"><span>${c.Phone}</span></td>
-                <td>
-                    <button type="button" id="edit_button${i}" class="btn-edit" onclick="edit_row(${i})">✏️</button>
-        <button type="button" id="save_button${i}" class="btn-save" onclick="save_row(${i})" style="display:none">💾</button>
-        <button type="button" id="delete_button${i}" class="btn-delete" onclick="delete_row(${i})">🗑️</button>
-                </td>`;
-            tbody.appendChild(tr);
-        });
-    }
-
-    // Dummy functions so buttons don't break
-    window.edit_row = function(i) { console.log("edit_row", i); };
-    window.save_row = function(i) { console.log("save", i); };
-    window.delete_row = function(i) { console.log("delete", i); };
-
-    // Call loadContacts after DOM is ready
-    loadContacts();
-});
-</script> -->
     </main>
 </body>
 </html>      

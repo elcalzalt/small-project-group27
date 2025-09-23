@@ -272,9 +272,9 @@ function loadContacts() {
                     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
                     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
-                        "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>✏️</button>" +
-                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>💾</button>" +
-                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'>🗑️</button>";
+                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'><i class='fa-solid fa-pencil'></i></button>"+
+                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'><i class='fa-solid fa-check'></i></button>" +
+                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'><i class='fa-solid fa-trash-can'></i></button>";
                     text += "</tr>"
                 }
                 text += "</table>"
@@ -451,9 +451,9 @@ function searchContacts() {
                     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
                     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
-                        "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>✏️</button>" +
-                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>💾</button>" +
-                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'>🗑️</button>" +
+                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'><i class='fa-solid fa-pencil'></i></button>"+
+                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'><i class='fa-solid fa-check'></i></button>" +
+                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'><i class='fa-solid fa-trash-can'></i></button>";
                     "</td>";
                     text += "</tr>";
                 }

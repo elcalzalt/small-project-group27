@@ -141,10 +141,12 @@
 .tables {
     margin-top: 50px;
     width: 100%;
+    table-layout: fixed;
     border-radius: 15px;
+}
+.table__wrap{
     height: 500px;
     overflow: auto;
-    table-layout: fixed;
 }
 #contacts td{
     border: 3px solid rgb(158, 116, 74);
@@ -196,40 +198,39 @@
 .btn-edit,
 .btn-save,
 .btn-delete {
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #66471b;;
   border-radius: 50%;   /* makes them round */
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  margin: 2px;
+  background-color: rgba(245,240,230); 
+  transition: 0.3s;
 }
-
-.btn-edit {
-  background-color: #4caf50; /* green */
+.btn-edit i,
+.btn-save i,
+.btn-delete i {
+  font-size: 20px;   /* icon size */
+   color: #66471b;
+}
+/* .btn-edit {
+  background-color: #95f199; 
   color: white;
 }
 
 .btn-save {
-  background-color: #2196f3; /* blue */
+  background-color: #5daded;
   color: white;
+} */
+.btn-edit:hover,
+.btn-save:hover,
+.btn-delete:hover{
+    transform: scale(1.3);  
 }
-
 .btn-delete {
-  background-color: #f44336; /* red */
-  color: white;
-}
-
-
-#not-found{
-    display: none;
-    margin-top: 50px;
-    padding: 25px 30px;
-    font-weight: 500;
-    font-size: 3rem;
-    font-weight: bold;
-    color: rgba(110,80,50);
-    background-color: rgba(245,240,230);
-    border: 4px solid red;
-    border-radius: 15px;
+  /* background-color: #f67d75; 
+  color: white; */
+  margin-left: 20px;
 }

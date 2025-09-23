@@ -186,9 +186,8 @@
     background-color: rgba(245,240,230);
 }
 #contacts td span {
-    display: block;
+    display: inline-block;
     white-space: nowrap;
-    overflow: hidden;
     font-size: 100%;
     color: #66471b;
 }

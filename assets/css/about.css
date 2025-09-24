@@ -1,0 +1,90 @@
+.container{
+    width: 100vw;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__card {
+    width: 300px;
+    height: 379px;
+    border-radius: 20px;
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 379px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: 0.85s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__card:hover {
+    background-position: left center;
+    background-size: 600px; /* this will now transition */
+    
+}
+.container__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0); /* start transparent */
+    transition: background-color 0.5s ease;
+}
+
+.container__card:hover::before {
+    background-color: rgba(0,0,0,0.5); /* dark overlay on hover */
+}
+.card1{
+    background-image: url("../img/Chris.png");
+}
+.card2{
+    background-image: url("../img/hinhanh.png");
+}
+.card3{
+    background-image: url("../img/alias.png");
+    
+}
+.card4{
+    background-color: black;
+    /* background-image: url("../img/hinhanh.png"); */
+}
+.card5{
+    
+    background-image: url("../img/nick.png");
+}
+.line{
+    width: 270px;
+    height: 349px;
+    z-index: 2;
+    border: 2px solid white;
+    opacity: 0;
+    transform: translateY(20px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    transition: 1s;
+}
+
+/* Card content */
+.card__content,.card__name {
+  font-size: 3rem;
+  font-weight: 500;
+  z-index: 2; 
+  color: white;
+  opacity: 0;       
+  transform: translateY(20px); /* slightly move down */
+  transition: opacity 1s ease, transform 1s ease;
+}
+.container__card:hover .card__content,.container__card:hover .card__name,.container__card:hover .line {
+  opacity: 1;
+  transform: translateY(0); /* move into place */
+}

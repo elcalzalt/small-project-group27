@@ -1,3 +1,12 @@
+.main-about__wrap{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;  
+    height: 800px; 
+    overflow: auto;
+}
+
 .container{
     width: 100vw;
     display: flex;

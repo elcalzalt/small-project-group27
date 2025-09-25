@@ -23,69 +23,90 @@
                     <a class="bar-left__item" href="#!">Services</a>
                     <a class="bar-left__item" href="#!">Pricing</a>
                     <a class="bar-left__item" href="about.html">About Us</a>
+                    
                 </div>
+                <button class="mobile__menu" onclick="toggleMenu()">
+                        <i class="fa-solid fa-bars"></i>
+                        <ul class="mobile-menu__list" id="hidden__menu">
+                            <li class="menu-list__margin"><a class="menu-list__items" href="#!">Services</a></li>
+                            <li class="menu-list__margin"><a class="menu-list__items" href="#!">Pricing</a></li>
+                            <li class="menu-list__margin"><a class="menu-list__items" href="about.html">About Us</a></li>
+                        </ul>
+                    </button>
+
                 <div class="nav-bar__right">
                     <a href="sign.html" class="bar-right__cta bar-right__sign-in">Sign in</a>
                     <a href="sign.html" class="bar-right__cta bar-right__sign-up">Sign up</a>
                 </div>
             </nav>
         </div>
+        <script>
+            function toggleMenu() {
+            const menu = document.getElementById("hidden__menu");
+            menu.style.display = (menu.style.display === "none") ? "block" : "none";
+            }
+        </script>
     </header>
     <!-- Main -->
     <div class="main">
         <div class="content main__center-wrap">
             <div class="main__wrap">
+                <!-- Decoration -->
+                <div class="main-right__decor1">
+                    <section class="right-decor1__item">
+                        <i class="fa-solid fa-server"></i>
+                        <p class="decor1-item__desc">Secure storage for vital contacts</p>
+                    </section>
+                    <section class="right-decor1__item">
+                        <i class="fa-solid fa-globe"></i>
+                        <p class="decor1-item__desc">Easy access from anywhere</p>
+                    </section>
+                    <section class="right-decor1__item">
+                        <i class="fa-solid fa-network-wired"></i>
+                        <p class="decor1-item__desc">High-speed and reliable connection</p>
+                    </section>
+                </div>     
+                <div class="main-right__decor2">
+                    <img src="./assets/img/heart.jpg" alt="" class="right-decor2__img">
+                    <div class="right-decor2__wrap">
+                        <span class="right-decor2__desc">Over</span>
+                        <span class="right-decor2__desc">25000+</span>
+                        <span class="right-decor2__desc">users around the world.</span>
+                        <div class="right-decor2__read-more">
+                            <a href="#!" class="right-decor2__desc right-decor2__read right-decor2__cta">Read more</a>
+                            <a href="#!"><i class="fa-solid fa-arrow-right right-decor2__read"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-right__decor3">
+                    <div class="right-decor3__score">
+                        <div class="decor3-score__person">
+                            <img src="./assets/img/fb ava.jpg" alt="" class="decor3-score__ava">
+                            <p class="decor3-score__name">D. Alex</p>
+                        </div>
+                        <div class="decor3-score__rate">
+                            <span class="score-rate__number">4.7</span>
+                            <img src="./assets/img/star.png" alt="" class="score-rate__start">
+                         </div>
+                            </div>
+                        <div class="right-decor3__line"></div>
+                        <p class="decor3__feedback">"Saved me many times when I accidentally deleted my phone contacts"</p>
+                  
+                </div>
+                <i class="fa-solid fa-paper-plane main-right__decor4"></i>
+                <!-- Main right -->
                 <div class="main__right">
                     <span class="main-right__sub-title">Welcome to </span>
                     <p class="main-right__sub-title main-right-sub-title__logo">TALK</p>
                     <div class="main-right__decoration">
                         <h1 class="main-right__title">Seamless connections.</h1>
-                        <div class="main-right__decor1">
-                           <section class="right-decor1__item">
-                            <i class="fa-solid fa-server"></i>
-                            <p class="decor1-item__desc">Secure storage for vital contacts</p>
-                           </section>
-                           <section class="right-decor1__item">
-                            <i class="fa-solid fa-globe"></i>
-                            <p class="decor1-item__desc">Easy access from anywhere</p>
-                           </section>
-                           <section class="right-decor1__item">
-                            <i class="fa-solid fa-network-wired"></i>
-                            <p class="decor1-item__desc">High-speed and reliable connection</p>
-                           </section>
-                        </div>
-                        <div class="main-right__decor2">
-                            <img src="./assets/img/heart.jpg" alt="" class="right-decor2__img">
-                            <div class="right-decor2__wrap">
-                                <span class="right-decor2__desc">Over</span>
-                                <span class="right-decor2__desc">25000+</span>
-                                <span class="right-decor2__desc">users around the world.</span>
-                                <div class="right-decor2__read-more">
-                                <a href="#!" class="right-decor2__desc right-decor2__read right-decor2__cta">Read more</a>
-                                <a href="#!"><i class="fa-solid fa-arrow-right right-decor2__read"></i></a>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="main-right__decor3">
-                            <div class="right-decor3__score">
-                                <div class="decor3-score__person">
-                                    <img src="./assets/img/fb ava.jpg" alt="" class="decor3-score__ava">
-                                    <p class="decor3-score__name">D. Alex</p>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                                <div class="decor3-score__rate">
-                                    <span class="score-rate__number">4.7</span>
-                                    <img src="./assets/img/star.png" alt="" class="score-rate__start">
-                                </div>
-                            </div>
-                            <div class="right-decor3__line"></div>
-                            <p class="decor3__feedback">"Saved me many times when I accidentally deleted my phone contacts"</p>
-                        </div>
+                        
+                        
                         <p class="main-right__desc">An application designed to efficiently store, manage, and update your contact list.</p>
                         <div class="cta">
-                            <div class="main-right__decor"></div>
+                            <!-- <div class="main-right__decor"></div> -->
                             <a href="sign.html" class="btn main-right__cta">Get started</a>
-                            <i class="fa-solid fa-paper-plane main-right__decor4"></i>
+                            
                             
                         </div>
                         

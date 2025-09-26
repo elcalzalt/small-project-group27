@@ -186,3 +186,25 @@
 .btn__wrap{
     position: relative;
 }
+
+/* Responsive */
+@media only screen and (max-width:800px){
+    .form-sign-in__wrap{
+        display: none;
+    }
+    .form__center-wrap{
+        height: calc(100vh - 70px);
+    }
+}
+@media only screen and (max-width:500px){
+    .form-sign-in__wrap{
+        display: none;
+    }
+    .form__sign-in,.form__sign-up{
+        width: 300px;
+        height: 450px;
+    }
+    .toggle-btn{
+        width: 300px;
+    }
+}

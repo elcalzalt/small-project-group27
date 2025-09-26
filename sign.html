@@ -27,12 +27,26 @@
                     <a class="bar-left__item" href="#!">Pricing</a>
                     <a class="bar-left__item" href="about.html">About Us</a>
                 </div>
+                <button class="mobile__menu" onclick="toggleMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                    <ul class="mobile-menu__list" id="hidden__menu">
+                        <li class="menu-list__margin"><a class="menu-list__items" href="#!">Services</a></li>
+                        <li class="menu-list__margin"><a class="menu-list__items" href="#!">Pricing</a></li>
+                        <li class="menu-list__margin"><a class="menu-list__items" href="about.html">About Us</a></li>
+                    </ul>
+                </button>
                 <div class="nav-bar__right">
                     <a href="sign.html" class="bar-right__cta bar-right__sign-in">Sign in</a>
                     <a href="sign.html" class="bar-right__cta bar-right__sign-up">Sign up</a>
                 </div>
             </nav>
         </div>
+        <script>
+            function toggleMenu() {
+            const menu = document.getElementById("hidden__menu");
+            menu.style.display = (menu.style.display === "none") ? "block" : "none";
+            }
+        </script>
     </header>
     <!-- Form -->
     <main class="sign-form">
@@ -54,6 +68,7 @@
                             
                         </form>
                     </section>
+
                 </div>
                 <!-- Signup part -->
                 <div class="form-sign-up__wrap">
@@ -63,47 +78,48 @@
                     </div>
                     <section class="form__sign-up">
                        
-                    <form id="signup" class="form-input__sign-up">
-                        <input type="text" class="input-field" id="firstName" placeholder="first&nbsp;name" name="firstName" required autocomplete="off"/>
-                        <input type="text" class="input-field" id="lastName" placeholder="last&nbsp;name" name="lastName" required autocomplete="off"/>
-                        <input type="text" class="input-field" id="username" placeholder="username" name="login" required
-                            pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
-                            title="Must be between 3-13 characters and must contain at least one letter" autocomplete="off"/>
-                        <div id="explanation-user" class="form-sign-up__style">
-                            <p id="userLett" class="invalid">
-                            At least one letter
-                            </p>
-                            <p id="userLen" class="invalid">
-                            3 to 18 characters
-                            </p>
-                            <p id="userspace" class="valid">
-                            No space allowed
-                            </p>
-                            <p id="userSpec" class="valid explanation-user__margin">
-                            No special characters "!@#$%^&*"(Except "-", "_")
-                            </p>
-                        </div>
-                        <input type="password" class="input-field" id="password" placeholder="password" name="password" required
-                            pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"
-                            title="Must be between 8-32 characters and must contain at least one number and one special character" />
-                        <div id="explanation-pass" class="form-sign-up__style">
-                            <p id="passLen" class="invalid">
-                            8 to 32 characters
-                            </p>
-                            <p id="passLett" class="invalid">
-                            At least one letter
-                            </p>
-                            <p id="passNum" class="invalid">
-                            At least one number
-                            </p>
-                            <p id="passSpec" class="invalid explanation-user__margin">
-                            At least one special character
-                            </p>
-                        </div>    
-                        <button type="button" id="signupButton" class="submit-btn" onclick="doSignup()">Signup</button><br/>  
-                        
-                    </form>
-                </section>
+                        <form id="signup" class="form-input__sign-up">
+                            <input type="text" class="input-field" id="firstName" placeholder="first&nbsp;name" name="firstName" required autocomplete="off"/>
+                            <input type="text" class="input-field" id="lastName" placeholder="last&nbsp;name" name="lastName" required autocomplete="off"/>
+                            <input type="text" class="input-field" id="username" placeholder="username" name="login" required
+                                pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}"
+                                title="Must be between 3-13 characters and must contain at least one letter" autocomplete="off"/>
+                            <div id="explanation-user" class="form-sign-up__style">
+                                <p id="userLett" class="invalid">
+                                At least one letter
+                                </p>
+                                <p id="userLen" class="invalid">
+                                3 to 18 characters
+                                </p>
+                                <p id="userspace" class="valid">
+                                No space allowed
+                                </p>
+                                <p id="userSpec" class="valid explanation-user__margin">
+                                No special characters "!@#$%^&*"(Except "-", "_")
+                                </p>
+                            </div>
+                            <input type="password" class="input-field" id="password" placeholder="password" name="password" required
+                                pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"
+                                title="Must be between 8-32 characters and must contain at least one number and one special character" />
+                            <div id="explanation-pass" class="form-sign-up__style">
+                                <p id="passLen" class="invalid">
+                                8 to 32 characters
+                                </p>
+                                <p id="passLett" class="invalid">
+                                At least one letter
+                                </p>
+                                <p id="passNum" class="invalid">
+                                At least one number
+                                </p>
+                                <p id="passSpec" class="invalid explanation-user__margin">
+                                At least one special character
+                                </p>
+                            </div>    
+                            <button type="button" id="signupButton" class="submit-btn" onclick="doSignup()">Signup</button><br/>  
+                            
+                        </form>
+                    </section>
+                    sign
                 </div>
             </div>
         </div>

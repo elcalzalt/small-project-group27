@@ -3,7 +3,7 @@
     align-items: flex-start;
     justify-content: center;
     text-align: center;  
-    height: 800px; 
+    height: clamp(400px,2vh + 390px,800px); 
     overflow: auto;
 }
 

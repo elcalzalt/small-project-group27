@@ -12,7 +12,7 @@
     display: inline-block;
     margin: 0 auto;
     font-family: "Sen";
-    font-size: 8rem;
+    font-size: clamp(2rem, 2vw + 2rem,8rem);
     font-weight: bold;
     color: #171100;
 }
@@ -28,7 +28,7 @@
     border: 4px solid rgba(110,80,50);
     border-radius: 15px;
     width: 50vw;
-    min-width: 200px;
+    min-width: 350px;
     padding: 20px 0;
     border-radius: 17px;
     outline: 0;
@@ -51,7 +51,7 @@
   color: transparent; 
 }
 .search-container__func-name{
-    font-size: 2.5rem;
+    font-size: clamp(0.8rem, 2vw + 1rem,2.5rem);
     font-weight: 600;
 }
 .functions__wrap{
@@ -63,8 +63,8 @@
 .functions__cta{
     width: 210px;
     display: inline-block;
-    font-size: 2.5rem;
-    padding: 30px;
+    font-size: clamp(0.8rem, 2vw + 1rem,2.5rem);
+    padding: clamp(10px,1vw + 10px,30px);
     font-weight: 600;
     border: 0;
     background-color: rgba(110,80,50,1);
@@ -232,4 +232,30 @@
   /* background-color: #f67d75; 
   color: white; */
   margin-left: 20px;
+}
+
+/* Responsive */
+@media only screen and (max-width:800px){
+   
+    .contacts{
+        height: calc(100vh - 70px);
+    }
+    .functions__wrap{
+        margin-top: 15px;
+    }
+    .contacts__welcome{
+        padding-top: 20px;
+    }
+    .search-container{
+        margin-top: 15px;
+    }
+    .search-container__input{
+        margin-top: 5px;
+        padding: 8px 0;
+        padding-left: 20px;
+    }
+    
+}
+@media only screen and (max-width:500px){
+    
 }

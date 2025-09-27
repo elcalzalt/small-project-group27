@@ -53,7 +53,7 @@
         <div class="content form__center-wrap">
             <div class="form__wrap">
                 <!-- Signin part -->
-                <div class="form-sign-in__wrap">
+                <div class="form-sign-in__wrap" id="sign-in__id">
                     <div class="btn__wrap">
                         <button type="button" class="toggle-btn toggle-btn__sign-in" onclick="clickRegister()" id="loginSlider">Login</button>
                         <p class="login__result" id="loginResult"></p>
@@ -68,10 +68,10 @@
                             
                         </form>
                     </section>
-
+                    <button id="move-sign-up__button" onclick="moveSignUp()">Sign up here</button>
                 </div>
                 <!-- Signup part -->
-                <div class="form-sign-up__wrap">
+                <div class="form-sign-up__wrap" id="sign-up__id">
                     <div class="btn__wrap">
                         <button type="button" class="toggle-btn toggle-btn__sign-up" >Signup</button>
                         <p class="signup__result" id="signupResult"></p>
@@ -119,12 +119,38 @@
                             
                         </form>
                     </section>
-                    sign
+                    <button id="move-sign-in__button" onclick="moveSignIn()">Sign in here</button>
                 </div>
             </div>
         </div>
     <!--code for username criteria message-->
     <script>
+        //move to sign in/up
+        function moveSignIn() {
+            const btn__signin = document.getElementById("move-sign-in__button");
+            const btn__signup = document.getElementById("move-sign-up__button");
+            const sign__in = document.getElementById("sign-in__id");
+            const sign__up = document.getElementById("sign-up__id");
+            
+            btn__signin.style.display = "block";
+            sign__in.style.display = "block";
+            btn__signin.style.display = "none";
+            sign__up.style.display = "none";
+            
+        }
+        function moveSignUp() {
+            const btn__signin = document.getElementById("move-sign-in__button");
+            const btn__signup = document.getElementById("move-sign-up__button");
+            const sign__in = document.getElementById("sign-in__id");
+            const sign__up = document.getElementById("sign-up__id");
+            
+            btn__signin.style.display = "none";
+            sign__in.style.display = "none";
+            btn__signin.style.display = "block";
+            sign__up.style.display = "block";
+            
+        }
+        //========================    
         let fNameField = document.getElementById("firstName");
         let lNameField = document.getElementById("lastName");
         let userform = document.getElementById("username");

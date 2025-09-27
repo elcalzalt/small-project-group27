@@ -35,12 +35,26 @@
                     <a class="bar-left__item" href="#!">Pricing</a>
                     <a class="bar-left__item" href="about.html">About Us</a>
                 </div>
+                <button class="mobile__menu" onclick="toggleMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                    <ul class="mobile-menu__list" id="hidden__menu">
+                        <li class="menu-list__margin"><a class="menu-list__items" href="#!">Services</a></li>
+                        <li class="menu-list__margin"><a class="menu-list__items" href="#!">Pricing</a></li>
+                        <li class="menu-list__margin"><a class="menu-list__items" href="about.html">About Us</a></li>
+                    </ul>
+                </button>
                 <div class="nav-bar__right">
                     <a href="sign.html" class="bar-right__cta bar-right__sign-in">Sign in</a>
                     <a href="sign.html" class="bar-right__cta bar-right__sign-up">Sign up</a>
                 </div>
             </nav>
         </div>
+        <script>
+            function toggleMenu() {
+            const menu = document.getElementById("hidden__menu");
+            menu.style.display = (menu.style.display === "none") ? "block" : "none";
+            }
+        </script>
     </header>
     <!-- Main -->
     <main class="contacts">

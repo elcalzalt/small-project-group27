@@ -128,6 +128,9 @@
     box-shadow: 0 0 0 6px rgba(110,80,50,1);
     transition: .4s;
 }
+.form-sign-up__wrap{
+    display: none;
+}
 .form-sign-up__wrap:hover .form__sign-up{
     opacity: 1;
     outline: 7px solid rgba(110,80,50);
@@ -186,25 +189,42 @@
 .btn__wrap{
     position: relative;
 }
-
+#move-sign-in__button, #move-sign-up__button{
+    margin-top: 20px;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #171100;
+    background-color: rgba(245,240,230);
+}
+#move-sign-up__button{
+    display: inline-block;
+}
+#move-sign-in__button{
+    display: none;
+}
 /* Responsive */
 @media only screen and (max-width:800px){
-    .form-sign-in__wrap{
-        display: none;
-    }
+   
     .form__center-wrap{
         height: calc(100vh - 70px);
     }
+    
 }
 @media only screen and (max-width:500px){
-    .form-sign-in__wrap{
-        display: none;
-    }
+   
+   
     .form__sign-in,.form__sign-up{
         width: 300px;
         height: 450px;
     }
+    .form-sign-in__wrap,.form-sign-up__wrap{
+        margin-top: 50px;
+    }
     .toggle-btn{
         width: 300px;
     }
+    
 }

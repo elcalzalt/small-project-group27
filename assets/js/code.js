@@ -1,4 +1,4 @@
-const urlBase = 'http://thanksss.xyz/LAMPAPI';
+const urlBase = `${location.protocol}//thanksss.xyz/LAMPAPI`;
 const extension = 'php';
 
 let userId = 0;

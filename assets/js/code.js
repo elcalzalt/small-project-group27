@@ -185,7 +185,7 @@ function doLogout() {
 function showTable() {
     
     var x = document.getElementById("addMe");
-    var contacts = document.getElementById("contactsTable");
+    var contacts = document.getElementById("contacts__list");
     var search = document.getElementById("function__search");
     if (window.getComputedStyle(x).display === "none") {
         x.style.display = "flex";
@@ -263,22 +263,43 @@ function loadContacts() {
                     console.log(jsonObject.error);
                     return;
                 }
-                let text = "<table border='1'>"
+                // let text = "<table border='1'>"
+                // for (let i = 0; i < jsonObject.results.length; i++) {
+                //     ids[i] = jsonObject.results[i].ID
+                //     text += "<tr id='row" + i + "'>"
+                //     text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
+                //     text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
+                //     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
+                //     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
+                //     text += "<td>" +
+                //          "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'><i class='fa-solid fa-pencil'></i></button>"+
+                //         "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'><i class='fa-solid fa-check'></i></button>" +
+                //         "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'><i class='fa-solid fa-trash-can'></i></button>";
+                //     text += "</tr>"
+                // }
+                // text += "</table>"
+                let text = ""; // We'll add blocks instead of table rows
                 for (let i = 0; i < jsonObject.results.length; i++) {
-                    ids[i] = jsonObject.results[i].ID
-                    text += "<tr id='row" + i + "'>"
-                    text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
-                    text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
-                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
-                    text += "<td>" +
-                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'><i class='fa-solid fa-pencil'></i></button>"+
-                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'><i class='fa-solid fa-check'></i></button>" +
-                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'><i class='fa-solid fa-trash-can'></i></button>";
-                    text += "</tr>"
+                    ids[i] = jsonObject.results[i].ID;
+
+                    text += "<div class='contact__item' id='block" + i + "'>";
+                        text += "<div class='first__rows'>";
+                            text += "<div class='first-rows__name'>";
+                                text += "<span id='first_Name" + i + "'>" + jsonObject.results[i].FirstName + "</span>";
+                                text += "<span id='last_Name" + i + "'>" + jsonObject.results[i].LastName + "</span>";
+                            text += "</div>";
+                            text += "<div class='first-rows__btn'>";
+                                text += "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>Edit</button>";
+                                text += "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>Save</button>";
+                                text += "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'>Delete</button>";
+                            text += "</div>";
+                        text += "</div>";
+
+                        text += "<p class='contacts__phone'><span id='phone" + i + "'>" + jsonObject.results[i].Phone + "</span></p>";
+                        text += "<p class='contacts__email'><span id='email" + i + "'>" + jsonObject.results[i].Email + "</span></p>";
+                    text += "</div>"; // End contact block
                 }
-                text += "</table>"
-                document.getElementById("tbody").innerHTML = text;
+                document.getElementById("contacts__list").innerHTML = text;
             }
         };
         xhr.send(jsonPayload);
@@ -302,10 +323,10 @@ function edit_row(id) {
     var email_data = email.innerText;
     var phone_data = phone.innerText;
 
-    firstNameI.innerHTML = "<input type='text' id='namef_text" + id + "' value='" + namef_data + "'>";
-    lastNameI.innerHTML = "<input type='text' id='namel_text" + id + "' value='" + namel_data + "'>";
-    email.innerHTML = "<input type='text' id='email_text" + id + "' value='" + email_data + "'>";
-    phone.innerHTML = "<input type='text' id='phone_text" + id + "' value='" + phone_data + "'>"
+    firstNameI.innerHTML = "<input type='text' class='edit-input__namef' id='namef_text" + id + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input type='text' class='edit-input__namel' id='namel_text" + id + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input type='text' class='edit-input__email' id='email_text" + id + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input type='text' class='edit-input__phone' id='phone_text" + id + "' value='" + phone_data + "'>"
 }
 
 function save_row(no) {
@@ -358,7 +379,7 @@ function delete_row(no) {
     nameTwo = namel_val.substring(0, namel_val.length);
     let check = confirm('Confirm deletion of contact: ' + nameOne + ' ' + nameTwo);
     if (check === true) {
-        document.getElementById("row" + no + "").outerHTML = "";
+        document.getElementById("block" + no + "").outerHTML = "";
         let tmp = {
             firstName: nameOne,
             lastName: nameTwo,
@@ -438,28 +459,32 @@ function searchContacts() {
 
                 if (jsonObject.error) {
                     console.log(jsonObject.error);
-                    document.getElementById("tbody").innerHTML = "";
+                    document.getElementById("contacts__list").innerHTML = "";
                     return;
                 }
 
-                let text = "<table border='1'>";
+                let text = ""; // We'll add blocks instead of table rows
                 for (let i = 0; i < jsonObject.results.length; i++) {
                     ids[i] = jsonObject.results[i].ID;
-                    text += "<tr id='row" + i + "'>";
-                    text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
-                    text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
-                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
-                    text += "<td>" +
-                         "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'><i class='fa-solid fa-pencil'></i></button>"+
-                        "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'><i class='fa-solid fa-check'></i></button>" +
-                        "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'><i class='fa-solid fa-trash-can'></i></button>";
-                    "</td>";
-                    text += "</tr>";
-                }
-                text += "</table>";
 
-                document.getElementById("tbody").innerHTML = text;
+                    text += "<div class='contact__item' id='block" + i + "'>";
+                        text += "<div class='first__rows'>";
+                            text += "<div class='first-rows__name'>";
+                                text += "<span id='first_Name" + i + "'>" + jsonObject.results[i].FirstName + "</span>";
+                                text += "<span id='last_Name" + i + "'>" + jsonObject.results[i].LastName + "</span>";
+                            text += "</div>";
+                            text += "<div class='first-rows__btn'>";
+                                text += "<button type='button' id='edit_button" + i + "' class='btn-edit' onclick='edit_row(" + i + ")'>Edit</button>";
+                                text += "<button type='button' id='save_button" + i + "' class='btn-save' onclick='save_row(" + i + ")' style='display: none'>Save</button>";
+                                text += "<button type='button' id='delete_button" + i + "' class='btn-delete' onclick='delete_row(" + i + ")'>Delete</button>";
+                            text += "</div>";
+                        text += "</div>";
+
+                        text += "<p class='contacts__phone'><strong>Phone: </strong> <span id='phone" + i + "'>" + jsonObject.results[i].Phone + "</span></p>";
+                        text += "<p class='contacts__email'><strong>Email: </strong> <span id='email" + i + "'>" + jsonObject.results[i].Email + "</span></p>";
+                    text += "</div>"; // End contact block
+                }
+                document.getElementById("contacts__list").innerHTML = text;
             }
         };
         xhr.send(jsonPayload);

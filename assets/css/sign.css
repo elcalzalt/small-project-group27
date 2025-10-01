@@ -136,7 +136,7 @@
     outline: 7px solid rgba(110,80,50);
     transition: .4s;
 }
-.form-sign-up__wrap:hover .toggle-btn__sign-up{
+.form-sign-up__wrap .toggle-btn__sign-up{
     opacity: 1;
     color: rgba(245,240,230);
     background-color: rgba(110,80,50);

@@ -350,7 +350,7 @@ html{
 }
 .right-decor2__cta:hover{
     text-decoration: underline;
-    
+    font-weight: 600;
 }
 /* responsive menu */
 .mobile__menu{

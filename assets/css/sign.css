@@ -109,18 +109,18 @@
     padding: 20px 30px;
     border-bottom-left-radius: 17px;
     border-bottom-right-radius: 17px;
-    opacity: 0.7;
-    
+    outline: 7px solid rgba(110,80,50);
+    transition: .4s;
 }
 .toggle-btn__sign-in,.toggle-btn__sign-up{
     transition: .2s;
 }
-.form-sign-in__wrap:hover .form__sign-in{
+/* .form-sign-in__wrap:hover .form__sign-in{
     opacity: 1;
     outline: 7px solid rgba(110,80,50);
-    transition: .4s;
-}
-.form-sign-in__wrap:hover .toggle-btn__sign-in{
+    
+} */
+.form-sign-in__wrap .toggle-btn__sign-in{
     opacity: 1;
     color: rgba(245,240,230);
     background-color: rgba(110,80,50);

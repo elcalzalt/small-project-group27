@@ -5,24 +5,22 @@
     $inData = getRequestInfo();
 
     // Check if required fields are present
-    if (!isset($inData["userId"]) || !isset($inData["firstName"]) || !isset($inData["lastName"])) {
+    if (!isset($inData["id"])) {
         $conn->close();
         returnWithError("Missing required fields", 400);
         exit();
     }
 
-    $userId = $inData["userId"];
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
+    $id = $inData["id"];
 
-    $stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName = ? AND LastName = ? AND UserID = ?");
+    $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
     if (!$stmt) {
         $conn->close();
         returnWithError("Failed to prepare statement: " . $conn->error);
         exit();
     }
 
-    if (!$stmt->bind_param("ssi", $firstName, $lastName, $userId)) {
+    if (!$stmt->bind_param("i", $id)) {
         $stmt->close();
         $conn->close();
         returnWithError("Failed to bind params");

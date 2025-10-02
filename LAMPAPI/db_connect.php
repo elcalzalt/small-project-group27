@@ -1,4 +1,6 @@
 <?php
+	require_once 'utils.php';
+	
 	$host = "localhost";
 	$username = "TheBeast";
 	$password = "WeLoveCOP4331";

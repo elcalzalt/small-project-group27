@@ -4,32 +4,46 @@
 
 	$inData = getRequestInfo();
 
+	// Check if required fields are present
+	if (!isset($inData["search"]) || !isset($inData["userId"])) {
+		$conn->close();
+		returnWithError("Missing required fields", 400);
+		exit();
+	}
+
 	$searchResults = [];
-	$searchCount = 0;
 
 	$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email, UserID, ID FROM Contacts WHERE (FirstName like ? OR LastName like?) AND UserID=?");
+	if (!$stmt) {
+		$conn->close();
+		returnWithError("Failed to prepare statement: " . $conn->error);
+		exit();
+	}
+
 	$searchTerm = "%" . $inData["search"] . "%";
-	$stmt->bind_param("sss", $searchTerm, $searchTerm, $inData["userId"]);
-	$stmt->execute();
+	if (!$stmt->bind_param("sss", $searchTerm, $searchTerm, $inData["userId"])) {
+		$stmt->close();
+		$conn->close();
+		returnWithError("Failed to bind params");
+		exit();
+	}
+
+	if (!$stmt->execute()) {
+		$stmt->close();
+		$conn->close();
+		returnWithError("Failed to execute statement: " . $stmt->error);
+		exit();
+	}
 
 	$result = $stmt->get_result();
-
 	while($row = $result->fetch_assoc())
 	{
 		$searchResults[] = $row;
-		$searchCount++;
 	}
 
-	if( $searchCount == 0 )
-	{
-		returnWithError( "No Records Found" );
-	}
-	else
-	{
-		$data = ["results" => $searchResults];
-		returnWithInfo( $data );
-	}
-
+	$data = ["results" => $searchResults];
+	returnWithInfo( $data);
+	
 	$stmt->close();
 	$conn->close();
 ?>

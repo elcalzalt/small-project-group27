@@ -3,36 +3,24 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson($obj) {
+	function sendResultInfoAsJson($obj, $responseCode) {
+		http_response_code($responseCode);
 		header('Content-type: application/json');
 		echo $obj;
 	}
 	
-	function returnWithError($err, $additionalFields = []) {
+	function returnWithError($err, $responseCode = 500) {
 		$retValue = ["error" => $err];
-		
-		// Add any additional fields that were passed
-		foreach ($additionalFields as $key => $value) {
-			$retValue[$key] = $value;
-		}
-		
-		// If no additional fields were specified, use default empty values for common fields
-		if (empty($additionalFields)) {
-			$retValue["id"] = 0;
-			$retValue["firstName"] = "";
-			$retValue["lastName"] = "";
-		}
-		
-		sendResultInfoAsJson(json_encode($retValue));
+		sendResultInfoAsJson(json_encode($retValue), $responseCode);
 	}
 	
-	function returnWithInfo($data) {
+	function returnWithInfo($data, $responseCode = 200) {
 		$retValue = $data;
 		$retValue["error"] = "";
-		sendResultInfoAsJson(json_encode($retValue));
+		sendResultInfoAsJson(json_encode($retValue), $responseCode);
 	}
 	
-	function returnWithMessage($message) {
-		returnWithInfo(["message" => $message]);
+	function returnWithMessage($message, $responseCode = 200) {
+		returnWithInfo(["message" => $message], $responseCode);
 	}
 ?>

@@ -14,7 +14,6 @@ function doLogin() {
     let login = document.getElementById("loginName").value;
     let password = document.getElementById("loginPassword").value;
 
-    var hash = md5(password);
     if (!validLoginForm(login, password)) {
         document.getElementById("loginResult").innerHTML = "invalid username or password";
         document.getElementById("loginResult").style.color = "red";
@@ -25,7 +24,7 @@ function doLogin() {
 
     let tmp = {
         login: login,
-        password: hash
+        password: password
     };
 
     let jsonPayload = JSON.stringify(tmp);
@@ -78,13 +77,11 @@ function doSignup() {
         return;
     }
 
-    var hash = md5(password);
-
     let tmp = {
         firstName: firstName,
         lastName: lastName,
         login: username,
-        password: hash
+        password: password
     };
 
     let jsonPayload = JSON.stringify(tmp);

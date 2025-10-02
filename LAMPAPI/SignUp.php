@@ -8,6 +8,7 @@
 	$lastName = $inData["lastName"];
 	$login = $inData["login"];
 	$password = $inData["password"];
+    $hashedPassword = md5($password);
 
 	$stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?");
 	$stmt->bind_param("s", $login);
@@ -17,7 +18,7 @@
 		$rows = mysqli_num_rows($result);
 		if ($rows == 0) {
 			$stmt = $conn->prepare("INSERT into Users (FirstName,LastName,Login,Password) VALUES (?,?,?,?)");
-			$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
+			$stmt->bind_param("ssss", $firstName, $lastName, $login, $hashedPassword);
 
 			if ($stmt->execute()) {
 				// Successfully inserted

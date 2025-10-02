@@ -16,7 +16,6 @@
 	
 	function returnWithInfo($data, $responseCode = 200) {
 		$retValue = $data;
-		$retValue["error"] = "";
 		sendResultInfoAsJson(json_encode($retValue), $responseCode);
 	}
 	

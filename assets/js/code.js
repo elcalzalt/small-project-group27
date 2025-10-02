@@ -256,10 +256,6 @@ function loadContacts() {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
-                if (jsonObject.error) {
-                    console.log(jsonObject.error);
-                    return;
-                }
                 // let text = "<table border='1'>"
                 // for (let i = 0; i < jsonObject.results.length; i++) {
                 //     ids[i] = jsonObject.results[i].ID
@@ -452,11 +448,6 @@ function searchContacts() {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
 
-                if (jsonObject.error) {
-                    console.log(jsonObject.error);
-                    document.getElementById("contacts__list").innerHTML = "";
-                    return;
-                }
 
                 let text = ""; // We'll add blocks instead of table rows
                 for (let i = 0; i < jsonObject.results.length; i++) {

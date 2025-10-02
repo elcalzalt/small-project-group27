@@ -36,8 +36,11 @@ function doLogin() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState != 4) {
+                return;
+            }
 
+            if (this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
                 userId = jsonObject.id;
 
@@ -53,6 +56,21 @@ function doLogin() {
 
                 saveCookie();
                 window.location.href = "contacts.html";
+            } else if (this.status == 400) {
+                document.getElementById("loginResult").innerHTML = "Missing required fields";
+                document.getElementById("loginResult").style.color = "red";
+                document.getElementById("loginResult").style.border = "5px solid red";
+                document.getElementById("loginResult").style.display = "inline-block";
+            } else if (this.status == 401) {
+                document.getElementById("loginResult").innerHTML = "Invalid username or password";
+                document.getElementById("loginResult").style.color = "red";
+                document.getElementById("loginResult").style.border = "5px solid red";
+                document.getElementById("loginResult").style.display = "inline-block";
+            } else {
+                document.getElementById("loginResult").innerHTML = "An error occurred. Please try again.";
+                document.getElementById("loginResult").style.color = "red";
+                document.getElementById("loginResult").style.border = "5px solid red";
+                document.getElementById("loginResult").style.display = "inline-block";
             }
         };
 
@@ -94,21 +112,11 @@ function doSignup() {
 
     try {
         xhr.onreadystatechange = function () {
-
             if (this.readyState != 4) {
                 return;
             }
 
-            if (this.status == 409) {
-                document.getElementById("signupResult").innerHTML = "User already exists";
-                document.getElementById("signupResult").style.color = "#171100";
-                document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,1)";
-                document.getElementById("signupResult").style.display = "inline-block";
-                return;
-            }
-
             if (this.status == 200) {
-
                 let jsonObject = JSON.parse(xhr.responseText);
                 userId = jsonObject.id;
                 document.getElementById("signupResult").innerHTML = "User added";
@@ -118,6 +126,21 @@ function doSignup() {
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
                 saveCookie();
+            } else if (this.status == 409) {
+                document.getElementById("signupResult").innerHTML = "User already exists";
+                document.getElementById("signupResult").style.color = "#171100";
+                document.getElementById("signupResult").style.border = "5px solid rgba(255,185,0,1)";
+                document.getElementById("signupResult").style.display = "inline-block";
+            } else if (this.status == 400) {
+                document.getElementById("signupResult").innerHTML = "Missing required fields";
+                document.getElementById("signupResult").style.color = "red";
+                document.getElementById("signupResult").style.border = "5px solid red";
+                document.getElementById("signupResult").style.display = "inline-block";
+            } else {
+                document.getElementById("signupResult").innerHTML = "An error occurred. Please try again.";
+                document.getElementById("signupResult").style.color = "red";
+                document.getElementById("signupResult").style.border = "5px solid red";
+                document.getElementById("signupResult").style.display = "inline-block";
             }
         };
 
@@ -224,13 +247,31 @@ function addContact() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if (this.status == 200) {
                 console.log("Contact has been added");
-                // Clear input fields in form 
+                // Clear input fields in form
                 document.getElementById("addMe").reset();
                 // reload contacts table and switch view to show
                 loadContacts();
                 showTable();
+            } else if (this.status == 400) {
+                console.log("Missing required fields");
+                // Display error message to user
+                alert("Error: Missing required fields");
+            } else if (this.status == 401) {
+                console.log("Unauthorized. Please log in again.");
+                // Display error message to user
+                alert("Error: Unauthorized. Please log in again.");
+                // Redirect to login page
+                window.location.href = "index.html";
+            } else {
+                console.log("An error occurred. Please try again.");
+                // Display error message to user
+                alert("Error: An error occurred. Please try again.");
             }
         };
         xhr.send(jsonPayload);
@@ -254,7 +295,11 @@ function loadContacts() {
 
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if (this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
                 // let text = "<table border='1'>"
                 // for (let i = 0; i < jsonObject.results.length; i++) {
@@ -293,6 +338,16 @@ function loadContacts() {
                     text += "</div>"; // End contact block
                 }
                 document.getElementById("contacts__list").innerHTML = text;
+            } else if (this.status == 400) {
+                console.log("Missing required fields");
+                document.getElementById("contacts__list").innerHTML = "<p>Error: Missing required fields</p>";
+            } else if (this.status == 401) {
+                console.log("Unauthorized. Please log in again.");
+                alert("Error: Unauthorized. Please log in again.");
+                window.location.href = "index.html";
+            } else {
+                console.log("An error occurred. Please try again.");
+                document.getElementById("contacts__list").innerHTML = "<p>Error: An error occurred. Please try again.</p>";
             }
         };
         xhr.send(jsonPayload);
@@ -354,9 +409,23 @@ function save_row(no) {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if (this.status == 200) {
                 console.log("Contact has been updated");
                 loadContacts();
+            } else if (this.status == 400) {
+                console.log("Missing required fields");
+                alert("Error: Missing required fields");
+            } else if (this.status == 401) {
+                console.log("Unauthorized. Please log in again.");
+                alert("Error: Unauthorized. Please log in again.");
+                window.location.href = "index.html";
+            } else {
+                console.log("An error occurred. Please try again.");
+                alert("Error: An error occurred. Please try again.");
             }
         };
         xhr.send(jsonPayload);
@@ -386,10 +455,27 @@ function delete_row(no) {
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try {
             xhr.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState != 4) {
+                    return;
+                }
 
+                if (this.status == 200) {
                     console.log("Contact has been deleted");
                     loadContacts();
+                } else if (this.status == 404) {
+                    console.log("No contact found with the provided ID");
+                    alert("Error: No contact found with the provided ID");
+                    loadContacts(); // Refresh the contact list
+                } else if (this.status == 400) {
+                    console.log("Missing required fields");
+                    alert("Error: Missing required fields");
+                } else if (this.status == 401) {
+                    console.log("Unauthorized. Please log in again.");
+                    alert("Error: Unauthorized. Please log in again.");
+                    window.location.href = "index.html";
+                } else {
+                    console.log("An error occurred. Please try again.");
+                    alert("Error: An error occurred. Please try again.");
                 }
             };
             xhr.send(jsonPayload);
@@ -445,9 +531,12 @@ function searchContacts() {
 
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let jsonObject = JSON.parse(xhr.responseText);
+            if (this.readyState != 4) {
+                return;
+            }
 
+            if (this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
 
                 let text = ""; // We'll add blocks instead of table rows
                 for (let i = 0; i < jsonObject.results.length; i++) {
@@ -471,6 +560,16 @@ function searchContacts() {
                     text += "</div>"; // End contact block
                 }
                 document.getElementById("contacts__list").innerHTML = text;
+            } else if (this.status == 400) {
+                console.log("Missing required fields");
+                document.getElementById("contacts__list").innerHTML = "<p>Error: Missing required fields</p>";
+            } else if (this.status == 401) {
+                console.log("Unauthorized. Please log in again.");
+                alert("Error: Unauthorized. Please log in again.");
+                window.location.href = "index.html";
+            } else {
+                console.log("An error occurred. Please try again.");
+                document.getElementById("contacts__list").innerHTML = "<p>Error: An error occurred. Please try again.</p>";
             }
         };
         xhr.send(jsonPayload);

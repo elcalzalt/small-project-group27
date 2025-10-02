@@ -8,8 +8,9 @@
 	$firstName = "";
 	$lastName = "";
 
+	$hashedPassword = md5($inData["password"]);
 	$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE Login=? AND Password =?");
-	$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+	$stmt->bind_param("ss", $inData["login"], $hashedPassword);
 	$stmt->execute();
 	$result = $stmt->get_result();
 

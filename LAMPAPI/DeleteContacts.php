@@ -28,7 +28,11 @@
     }
 
     if ($stmt->execute()) {
-        returnWithMessage("Successfully deleted contact");
+        if ($stmt->affected_rows > 0) {
+            returnWithMessage("Successfully deleted contact");
+        } else {
+            returnWithError("No contact found with the provided ID", 404);
+        }
     } else {
         returnWithError("Failed to delete contact: " . $stmt->error);
     }
